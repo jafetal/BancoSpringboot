@@ -32,6 +32,7 @@ private boolean enabled;
 @JoinTable(name="authorities_users",
 joinColumns=@JoinColumn(name="usuario_id"),
 inverseJoinColumns=@JoinColumn(name="authority_id"))
+
 private Set<Authority> authority;
 
 //Getters y Setters

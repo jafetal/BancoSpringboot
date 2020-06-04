@@ -1,3 +1,5 @@
+--Si no se pone esto en el Server de sql no arranca en mi compu :P
+SET GLOBAL time_zone ='-3:00';
 --La contraseña de todos es 1234
 --Este va a ser admin
 INSERT INTO user (id,enabled,password,username) VALUES(1,0b1,"$2a$04$XJUMQEYpIDM8eiGHfl.DguvuyECHuXyGyZdZAVstKHtUCH4Y.YE0K","admin");
