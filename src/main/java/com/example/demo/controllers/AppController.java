@@ -17,9 +17,9 @@ public class AppController {
 		return "menu";
 	}
 	
-	@GetMapping("/user")
+	@GetMapping("/cliente")
 	public String user(Model model) {
-		return "user";
+		return "cliente";
 	}
 	
 	@GetMapping("/admin")

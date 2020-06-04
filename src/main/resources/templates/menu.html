@@ -6,14 +6,33 @@
 </head>
 <body>
 	<head>
-        <title>Hello World!</title>
+		<link rel="stylesheet" th:href="@{/css/Estilosmenu1.css}">
+        <title>Bienvenido</title>
     </head>
     <body>
-        <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+    <div class="principal">
+    <div class="container">
+    	<div class="brand_logo_container">
+			<img th:src="@{/Images/user.png}" class="brand_logo" alt="Logo">
+		</div>
+    	<h1 th:inline="text" class="texto">Bienvenido [[${#httpServletRequest.remoteUser}]]</h1>
+        <!--Es Cliente.-->
+		<div class="elemento" th:if="${#httpServletRequest.isUserInRole('ROLE_USER')}">
+	        <h1><a class="boton" th:href="@{/}"> Ir a cliente</a>
+		</div>
+		<!--Es Admin.j -->
+		<div class="elemento" th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')}">
+		    <h1><a class="boton" th:href="@{/admin}">Ir a Administrador</a>
+		</div>
         <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Cerrar Sesion"/>
-        </form>
-        <h1><a th:href="@{/admin}"> admin</a> | <a th:href="@{/user}"> user</a></h1>
+	            <input class="logout" type="submit" value="Cerrar Sesion"/>
+	    </form>
+	</div>
+    </div>
+    
+    
+    
+        
     </body>
 </body>
 </html>

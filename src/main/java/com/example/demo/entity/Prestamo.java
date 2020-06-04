@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -24,9 +26,6 @@ public class Prestamo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	@NotNull
-	private Long id_cliente;
 	
 	@NotNull
 	private double monto;
@@ -37,9 +36,8 @@ public class Prestamo {
 	@NotNull
 	private Date fechaCreacion;
 
-	@Column(name = "fechaExpiracion")
+	@Column(name = "fecha_expiracion")
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@NotNull
 	private Date fechaExpiracion;
 	
@@ -47,14 +45,9 @@ public class Prestamo {
 
 	private boolean activo;
 	
-	
-	public Long getId_cliente() {
-		return id_cliente;
-	}
-
-	public void setId_cliente(Long id_cliente) {
-		this.id_cliente = id_cliente;
-	}
+	@JoinColumn(name = "FK_CLIENTE", nullable = false)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Cliente cliente;
 
 	public double getMonto() {
 		return monto;
@@ -94,6 +87,22 @@ public class Prestamo {
 
 	public void setActivo(boolean activo) {
 		this.activo = activo;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 	
 	
