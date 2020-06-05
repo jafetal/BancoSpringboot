@@ -21,9 +21,4 @@ public class AppController {
 	public String user(Model model) {
 		return "cliente";
 	}
-	
-	@GetMapping("/admin")
-	public String admin(Model model) {
-		return "admin";
-	}
 }

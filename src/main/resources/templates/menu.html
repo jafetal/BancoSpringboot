@@ -2,7 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 </head>
 <body>
 	<head>
@@ -18,7 +17,7 @@
     	<h1 th:inline="text" class="texto">Bienvenido [[${#httpServletRequest.remoteUser}]]</h1>
         <!--Es Cliente.-->
 		<div class="elemento" th:if="${#httpServletRequest.isUserInRole('ROLE_USER')}">
-	        <h1><a class="boton" th:href="@{/}"> Ir a cliente</a>
+	        <h1><a class="boton" th:href="@{/cliente}"> Ir a cliente</a>
 		</div>
 		<!--Es Admin.j -->
 		<div class="elemento" th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')}">

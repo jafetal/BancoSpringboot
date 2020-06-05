@@ -26,6 +26,15 @@ public class Cliente {
 	@Column
 	private double Monto;
 
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public Long getId_usuario() {
 		return id_usuario;
 	}

@@ -2,19 +2,17 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title th:text="Inicio">Insert title here</title>
+<title>Insert title here</title>
 	<link rel="stylesheet"
-		href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-		integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
-		crossorigin="anonymous">
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+	crossorigin="anonymous">
 	<link rel="stylesheet" th:href="@{/css/EstilosGeneral.css}">
-	
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-	
 </head>
 <body>
-
-
+	
+	
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<a class="navbar-brand" href="#">Sistema Administrador</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -32,7 +30,7 @@
 				
 				<li class="nav-item">
 				
-				<a class="nav-link" th:href="@{/admin/clientes}"><i class='far fa-user-circle icono'></i>Clientes</a>
+				<a class="nav-link" th:href="@{admin/clientes}"><i class='far fa-user-circle icono'></i>Clientes</a>
 				</li>
 				
 				
@@ -47,13 +45,21 @@
 	</nav>
 	
 	
-	
 	<div class="container">
-		<div>
-			<form th:action="@{/logout}" method="post">
-	            <input type="submit" value="Cerrar Sesion"/>
-	    	</form>
-    	</div>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Nombre</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="cliente: ${clientes}">
+					<td th:text="${cliente.id}"></td>
+					<td th:text="${cliente.Nombre}"></td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

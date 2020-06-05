@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org">
     
 <head>
-	<title>Bienvenido</title>
+	<title>Inicio de sesión</title>
 	
 	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 	<link rel="stylesheet" th:href="@{/css/EstilosIndex.css}">
@@ -44,10 +44,10 @@
 				   	</div>
 					</form>
 				</div>
-				<div th:if="${param.error}" class="alert alert-danger" role="alert">
+				<div th:if="${param.error}" class="alert alert-danger" style="margin-top:10px;" role="alert">
 		            	Credenciales incorrectas.
 		        	</div>
-		        	<div th:if="${param.logout}" class="alert alert-success" role="alert">
+		        	<div th:if="${param.logout}" class="alert alert-success" style="margin-top:10px;" role="alert">
 		            	Ha cerrado sesión.
 		        	</div>
 			</div>
