@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+	crossorigin="anonymous">
+	<link rel="stylesheet" th:href="@{/css/EstilosGeneral.css}">
+<title >Nuevo Cliente</title>
+</head>
+<body>
+	<div class="container">
+	<div class="menuClientes">
+	<div class = "pClientes">
+	<h1>Nuevo Cliente</h1>
+		<div th:object="${cliente}" th:remove="tag">
+			<ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+				Llene los campos correctamente para continuar
+			</ul>
+		</div>
+		<form th:action="@{/admin/cliente/guardar}" method="post"
+			th:object="${cliente}">
+
+			<div class="form-group">
+				<label class="col-sm-12 col-form-label" for="Nombre">Nombre completo:</label>
+				<div class="col-sm-12">
+					<input type="text" id="Nombre" th:field="*{Nombre}"
+						class="form-control" th:errorclass="'form-control alert-danger'">
+					<div class="form-text text-danger"
+						th:if="${#fields.hasErrors('Nombre')}" th:errors="*{Nombre}"></div>
+				</div>
+
+			</div>
+			<div class="form-group">
+				<label class="col-sm-12 col-form-label" for="Correo">Correo:</label>
+				<div class="col-sm-12">
+					<input type="text" id="Correo" th:field="*{Correo}"
+						class="form-control" th:errorclass="'form-control alert-danger'">
+					<div class="form-text text-danger"
+						th:if="${#fields.hasErrors('Correo')}" th:errors="*{Correo}"></div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-12 col-form-label" for="Telefono">Telefono:</label>
+				<div class="col-sm-12">
+					<input type="text" id="Telefono" th:field="*{Telefono}"
+						class="form-control" th:errorclass="'form-control alert-danger'">
+					<div class="form-text text-danger"
+						th:if="${#fields.hasErrors('Telefono')}" th:errors="*{Telefono}"></div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-12 col-form-label" for="Direccion">Direccion:</label>
+				<div class="col-sm-12">
+					<input type="text" id="Direccion" th:field="*{Direccion}"
+						class="form-control" th:errorclass="'form-control alert-danger'">
+					<div class="form-text text-danger"
+						th:if="${#fields.hasErrors('Direccion')}" th:errors="*{Direccion}"></div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-12 col-form-label" for="Monto">Monto:</label>
+				<div class="col-sm-12">
+					<input type="text" id="Monto" th:field="*{Monto}"
+						class="form-control" th:errorclass="'form-control alert-danger'">
+					<div class="form-text text-danger"
+						th:if="${#fields.hasErrors('Monto')}" th:errors="*{Monto}"></div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-12">
+					<input type="submit" id="enviar" value="enviar"
+						class="btn btn-success">
+					<a th:href="@{/admin/clientes}">
+					<button type="button" class="btn btn-danger">Cancelar</button>
+					</a>
+				</div>
+			</div>
+		</form>
+		</div>
+	</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+		integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+		crossorigin="anonymous"></script>
+</body>
+</html>

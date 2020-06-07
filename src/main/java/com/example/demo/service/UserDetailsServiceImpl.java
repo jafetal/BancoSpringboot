@@ -35,9 +35,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(authority.getAuthority());
             grantList.add(grantedAuthority);
     }
+    
 		
     //Crear El objeto UserDetails que va a ir en sesion y retornarlo.
     UserDetails user = (UserDetails) new User(appUser.getUsername(), appUser.getPassword(), grantList);
          return user;
     }
+    
 }

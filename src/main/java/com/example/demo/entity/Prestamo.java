@@ -46,8 +46,11 @@ public class Prestamo {
 	private boolean activo;
 	
 	@JoinColumn(name = "FK_CLIENTE", nullable = false)
-    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER )
     private Cliente cliente;
+	
+	//@ManyToOne(cascade = CascadeType.REMOVE)
+	//Cliente cliente;
 
 	public double getMonto() {
 		return monto;
@@ -57,6 +60,8 @@ public class Prestamo {
 		this.monto = monto;
 	}
 
+	
+	
 	public Date getFechaCreacion() {
 		return fechaCreacion;
 	}

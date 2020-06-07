@@ -48,8 +48,20 @@
 	
 	
 	
-	<div class="container">
-		
+	<div class="container pClientes">
+		<div class="menuClientes">
+			<h2>Control de Clientes</h2>
+			<div><a  th:href="@{/admin/cliente/form}">
+		            <button type="button" class="btn btn-success botonCL"><i class="fas fa-user-plus iC"></i>Agregar Cliente</button>
+		         </a>
+	    	</div>
+	    	<div><a th:href="@{/admin/cliente/form/editar}">
+		            <button type="button" class="btn btn-primary botonCL"><i class="fas fa-edit iC"></i>Editar Cliente</i></button>
+	    	</div></a>
+	    	<div><a th:href="@{/admin/cliente/form/eliminar}">
+		            <button type="button" class="btn btn-danger botonCL"><i class="fas fa-trash-alt iC"></i>Eliminar Cliente</i></button>
+	    	</div></a>
+		</div>
 	</div>
 
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

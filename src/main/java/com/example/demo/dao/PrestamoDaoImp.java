@@ -17,48 +17,51 @@ import com.example.demo.dao.User.AuthorityDao;
 import com.example.demo.dao.User.UserDao;
 import com.example.demo.entity.Authority;
 import com.example.demo.entity.Cliente;
+import com.example.demo.entity.Prestamo;
 import com.example.demo.entity.User;
 
 @Repository
-public class ClienteDaoImp implements ClienteDao {
+public class PrestamoDaoImp implements PrestamoDao {
 	@PersistenceContext
 	private EntityManager en;
 
 	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional(readOnly = true)
-	public List<Cliente> findAll() {
+	public List<Prestamo> findAll() {
 		/*HQL o JPQL != SQL*/
-		List<Cliente> result = en.createQuery("from Cliente").getResultList();
+		List<Prestamo> result = en.createQuery("from Prestamo").getResultList();
 		return result;
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public Cliente find(Long id) {
-		Cliente result = en.find(Cliente.class, id);//select * from alumno where id ={id}
+	public Prestamo find(Long id) {
+		Prestamo result = en.find(Prestamo.class, id);//select * from alumno where id ={id}
 		return result;
 	}
 
 	@Override
 	@Transactional
-	public void insert(Cliente nuevo) {
+	public void insert(Prestamo nuevo) {
 		en.persist(nuevo);
 		en.flush();
 	}
 
 	@Override
 	@Transactional
-	public void update(Cliente nuevo) {
-		Cliente antes = find(nuevo.getId());
+	public void update(Prestamo nuevo) {
+		Prestamo antes = find(nuevo.getId());
 		BeanUtils.copyProperties(nuevo, antes);
 		en.flush();
 	}
-	
-	@Transactional
+
 	@Override
+	@Transactional
 	public void delete(Long id) {
-		Cliente entity = find(id);
+		System.out.print("\n\n\n\n HAAAAAAAAAAAAAYYYYYYYYYYYYYYYY BORRANDO EL ID: "+ id + " \n\n\n\n");
+		Prestamo entity = find(id);
+		System.out.print("\n HAAAAAAAAAAAAAYYYYYYYYYYYYYYYY Encontre esto: "+ entity.getId() + " \n");
 		en.remove(entity);
 	}
 

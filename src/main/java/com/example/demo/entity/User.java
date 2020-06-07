@@ -9,7 +9,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.example.demo.dao.User.AuthorityDao;
 import com.example.demo.entity.Authority;
 
 @Entity
@@ -17,7 +22,7 @@ public class User {
 
 @Id
 @GeneratedValue(strategy=GenerationType.AUTO)
-private Long id;
+private Long id_usuario;
 
 @Column(name = "username")
 private String username;
@@ -32,26 +37,23 @@ private boolean enabled;
 @JoinTable(name="authorities_users",
 joinColumns=@JoinColumn(name="usuario_id"),
 inverseJoinColumns=@JoinColumn(name="authority_id"))
-
 private Set<Authority> authority;
-
-//Getters y Setters
 
 
 @Override
 public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((id == null) ? 0 :id.hashCode());
+    result = prime * result + ((id_usuario == null) ? 0 :id_usuario.hashCode());
     return result;
 }
 
 public Long getId() {
-	return id;
+	return id_usuario;
 }
 
 public void setId(Long id) {
-	this.id = id;
+	this.id_usuario = id;
 }
 
 public String getUsername() {
@@ -86,6 +88,7 @@ public void setAuthority(Set<Authority> authority) {
 	this.authority = authority;
 }
 
+
 @Override
 public boolean equals(Object obj) {
     if (this == obj)
@@ -95,17 +98,17 @@ public boolean equals(Object obj) {
     if (getClass() != obj.getClass())
         return false;
     User other = (User) obj;
-    if (id == null) {
-        if (other.id != null)
+    if (id_usuario == null) {
+        if (other.id_usuario != null)
             return false;
-        } else if (!id.equals(other.id))
+        } else if (!id_usuario.equals(other.id_usuario))
             return false;
         return true;
 }
 
 @Override
 public String toString() {
-    return "User [id=" + id + ", username=" + username + ", password=" + password + "]";
+    return "User [id=" + id_usuario + ", username=" + username + ", password=" + password + "]";
 }
 
 }
