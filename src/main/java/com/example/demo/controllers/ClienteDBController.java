@@ -1,7 +1,9 @@
 package com.example.demo.controllers;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +19,12 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.example.demo.dao.ClienteDao;
+import com.example.demo.dao.PrestamoDao;
 import com.example.demo.dao.User.AuthorityDao;
 import com.example.demo.dao.User.UserDao;
 import com.example.demo.entity.Authority;
 import com.example.demo.entity.Cliente;
+import com.example.demo.entity.Prestamo;
 import com.example.demo.entity.User;
 import com.example.demo.service.PrestamosService;
 import com.example.demo.service.UserDetailsServiceImpl;
@@ -40,6 +44,8 @@ public class ClienteDBController {
 	private UserDao userDao;
 	@Autowired
 	private PrestamosService pS;
+	@Autowired
+	PrestamoDao pDao;
 	
 	@GetMapping({"/listaClientes"})
 	public String mostrarClientes(Model model) {
@@ -96,9 +102,8 @@ public class ClienteDBController {
 	
 	@GetMapping({ "/eliminar/{id}" })
 	public String eliminar(@PathVariable Long id, Model model) {
-		System.out.print("\n\n\n\n HAAAAAAAAAAAAAYYYYYYYYYYYYYYYY ID Recibido: "+ id + " \n\n\n\n");
 		if (id != null && id > 0) {
-			//pS.borrarPrestamosC(id);
+			pS.borrarPrestamosC(id);
 			clienteDao.delete(id);
 		}
 		return "redirect:/admin/clientes";

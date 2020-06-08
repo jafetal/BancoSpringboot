@@ -45,8 +45,8 @@ public class Prestamo {
 
 	private boolean activo;
 	
-	@JoinColumn(name = "FK_CLIENTE", nullable = false)
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER )
+	@JoinColumn(name = "FK_CLIENTE", nullable = true)
+    @ManyToOne(fetch = FetchType.EAGER )
     private Cliente cliente;
 	
 	//@ManyToOne(cascade = CascadeType.REMOVE)

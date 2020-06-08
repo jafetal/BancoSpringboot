@@ -59,9 +59,7 @@ public class PrestamoDaoImp implements PrestamoDao {
 	@Override
 	@Transactional
 	public void delete(Long id) {
-		System.out.print("\n\n\n\n HAAAAAAAAAAAAAYYYYYYYYYYYYYYYY BORRANDO EL ID: "+ id + " \n\n\n\n");
 		Prestamo entity = find(id);
-		System.out.print("\n HAAAAAAAAAAAAAYYYYYYYYYYYYYYYY Encontre esto: "+ entity.getId() + " \n");
 		en.remove(entity);
 	}
 
