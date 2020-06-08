@@ -30,7 +30,7 @@
 				
 				<li class="nav-item">
 				
-				<a class="nav-link" th:href="@{admin/clientes}"><i class='far fa-user-circle icono'></i>Clientes</a>
+				<a class="nav-link" th:href="@{/admin/clientes}"><i class='far fa-user-circle icono'></i>Clientes</a>
 				</li>
 				
 				
@@ -38,8 +38,16 @@
 					th:href="@{/}"><i class='far fas fa-money-bill-wave icono'></i>Prestamos</a></li>
 					
 					
-				<li class="nav-item"><a class="nav-link"
-					th:href="@{/}"><i class='far fas fa-search icono'></i>Busquedas</a></li>
+				<li> <div class="dropdown nav-item">
+				 <a class="nav-link dropdown-toggle" data-toggle="dropdown"
+					th:href="@{/}"><i class='far fas fa-search icono'></i>Busquedas</a>
+				 
+				  <div class="dropdown-menu">
+				    <a class="dropdown-item" th:href="@{/admin/listaClientes}">Clientes</a>
+				    <a class="dropdown-item" th:href="@{/}">Prestamos</a>
+				    <a class="dropdown-item" th:href="@{/}">Dinero</a>
+				  </div>
+				</div> </li>
 			</ul>
 		</div>
 	</nav>
@@ -51,12 +59,20 @@
 				<tr>
 					<th>ID</th>
 					<th>Nombre</th>
+					<th>Correo</th>
+					<th>Telefono</th>
+					<th>Direccion</th>
+					<th>Monto</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="cliente: ${clientes}">
 					<td th:text="${cliente.id}"></td>
 					<td th:text="${cliente.Nombre}"></td>
+					<td th:text="${cliente.Correo}"></td>
+					<td th:text="${cliente.Telefono}"></td>
+					<td th:text="${cliente.Direccion}"></td>
+					<td th:text="${cliente.Monto}"></td>
 				</tr>
 			</tbody>
 		</table>

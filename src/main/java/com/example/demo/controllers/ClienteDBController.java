@@ -52,6 +52,12 @@ public class ClienteDBController {
 		model.addAttribute("clientes", clienteDao.findAll());
 		return "admin/busquedas/ListaClientes";
 	}
+	
+	@GetMapping({"/form/editar"})
+	public String fEdit(Model model) {
+		model.addAttribute("clientes", clienteDao.findAll());
+		return "admin/clientes/editForm";
+	}
 
 	@GetMapping({ "/form" })
 	public String form(Model model) {
@@ -61,11 +67,11 @@ public class ClienteDBController {
 		return "admin/clientes/addForm";
 	}
 
-	@GetMapping({ "/form/{id}" })
+	@GetMapping({ "/editar/{id}" })
 	public String editar(@PathVariable Long id, Model model) {
 		Cliente editar = clienteDao.find(id);
 		model.addAttribute("cliente", editar);
-		return "catalogo/alumno/form";
+		return "admin/clientes/addForm";
 	}
 
 	@PostMapping({ "/guardar" })
