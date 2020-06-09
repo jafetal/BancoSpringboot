@@ -14,13 +14,18 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import javax.validation.Valid;
+
 import java.sql.Date;
 import java.time.LocalDateTime;  
 
 import com.example.demo.dao.ClienteDao;
 import com.example.demo.dao.PrestamoDao;
 import com.example.demo.dao.User.AuthorityDao;
+import com.example.demo.entity.Cliente;
 import com.example.demo.entity.Prestamo;
+import com.example.demo.models.Monto;
 import com.example.demo.service.fechaService;
 
 @Controller
@@ -60,13 +65,64 @@ public class PrestamoDBController {
 		//System.out.print("\n\n\n\n"+PrestamoDao.find(1l).getId_usuario().getUsername());
 		return "admin/prestamos/SelectClient";
 	}
+	
+	@GetMapping({ "/abono" })
+	public String seleccionaCliente2(Model model) {
+		Monto a = new Monto();
+		model.addAttribute("Monto", a);
+		model.addAttribute("error",false);
+		model.addAttribute("error2",false);
+		model.addAttribute("clientes", clienteDao.findAll());
+		//System.out.print("\n\n\n\n"+PrestamoDao.find(1l).getId_usuario().getUsername());
+		return "admin/prestamos/SelectAbonar";
+	}
 
+	@GetMapping({ "/abonar/{id}" }) //se abona al prestamo que más debe
+	public String abonar(@PathVariable Long id,@Valid Monto abon,BindingResult result, Model model) {
+		ArrayList<Prestamo> p = new ArrayList<Prestamo>(prestamoDao.findAll());
+		p.sort((o1, o2) -> Double.compare(o2.getMonto(), o2.getMonto()));
+		Prestamo editar = new Prestamo();
+		for(Prestamo a: p) {
+			if(a.getCliente().getId()==id) {
+				editar = a;
+			}
+		}
+		if(result.hasErrors()) {
+			Monto a = new Monto();
+			model.addAttribute("Monto", a);
+			model.addAttribute("clientes", clienteDao.findAll());
+			model.addAttribute("error2",true);
+			model.addAttribute("error",false);
+			return "admin/prestamos/SelectAbonar";
+		}else {
+			if(editar.getId()!=null) {
+				editar.setMonto(editar.getMonto()- abon.getNumero());
+				prestamoDao.update(editar);
+				Cliente actualizacion = clienteDao.find(id);
+				actualizacion.setMonto(actualizacion.getMonto()-abon.getNumero());
+				clienteDao.update(actualizacion);
+			}else {
+				Monto a = new Monto();
+				model.addAttribute("Monto", a);
+				model.addAttribute("error2",false);
+				model.addAttribute("clientes", clienteDao.findAll());
+				model.addAttribute("error",true);
+				return "admin/prestamos/SelectAbonar";
+			}
+		}
+		return "redirect:/admin/prestamos";
+	}
+	
+	
 	@GetMapping({ "/editar/{id}" })
 	public String editar(@PathVariable Long id, Model model) {
+		ArrayList<Prestamo> p = new ArrayList<Prestamo>(prestamoDao.findAll());
+		p.sort((o1, o2) -> Double.compare(o2.getMonto(), o1.getMonto()));
 		Prestamo editar = prestamoDao.find(id);
 		model.addAttribute("prestamo", editar);
 		return "admin/prestamos/prestamoForm";
 	}
+
 	
 	@GetMapping({ "/mostrar" })
 	public String ver(Model model) {
@@ -85,6 +141,9 @@ public class PrestamoDBController {
 		}if (prestamo.getId() != null && prestamo.getId() > 0) {
 			prestamoDao.update(prestamo);
 		} else {
+			Cliente cliente = prestamo.getCliente();
+			cliente.setMonto(cliente.getMonto()+prestamo.getMonto());
+			clienteDao.update(cliente);
 			System.out.print("\n\n\n\nTratando de agregar prestamo al usaurio: " + prestamo.getCliente().getNombre() + "id: " + prestamo.getId());
 			switch(prestamo.getTipo().toString()) {
 			case "1":
