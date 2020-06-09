@@ -24,6 +24,10 @@ public class AdminController {
 		model.addAttribute("clientes", clienteDao.findAll());
 		return "admin/clientes/controlClientes";
 	}
+	@GetMapping({"/prestamos"})
+	public String prestamos(Model model) {
+		return "admin/prestamos/controlPrestamos";
+	}
 	
 	@GetMapping({"/listaClientes"})
 	public String mostrarClientes(Model model) {

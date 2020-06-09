@@ -53,26 +53,27 @@
 	</nav>
 	
 	
-	<div class="container">
-		<table class="table">
+	<div class="container" style="padding-top:20px;">
+	<a th:href="@{/admin/prestamos}" >
+					<button type="button" class="btn btn-dark" >Regresar</button>
+					</a>
+		<table class="table" >
 			<thead>
 				<tr>
 					<th>ID</th>
+					<th>Monto restante a pagar</th>
+					<th>Id cliente</th>
 					<th>Nombre</th>
-					<th>Correo</th>
-					<th>Telefono</th>
-					<th>Direccion</th>
-					<th>Monto</th>
+					<th>Expira</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="cliente: ${clientes}">
-					<td th:text="${cliente.id}"></td>
-					<td th:text="${cliente.Nombre}"></td>
-					<td th:text="${cliente.Correo}"></td>
-					<td th:text="${cliente.Telefono}"></td>
-					<td th:text="${cliente.Direccion}"></td>
-					<td th:text="${cliente.Monto}"></td>
+				<tr th:each="prestamo: ${prestamos}">
+					<td th:text="${prestamo.id}"></td>
+					<td th:text="${prestamo.Monto}"></td>
+					<td th:text="${prestamo.cliente.id}"></td>
+					<td th:text="${prestamo.cliente.Nombre}"></td>
+					<td th:text="${prestamo.fechaExpiracion}"></td>
 				</tr>
 			</tbody>
 		</table>

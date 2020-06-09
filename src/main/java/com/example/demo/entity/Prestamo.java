@@ -41,12 +41,13 @@ public class Prestamo {
 	@NotNull
 	private Date fechaExpiracion;
 	
-	private String Tipo;
+	@NotNull
+	private long Tipo;
 
 	private boolean activo;
 	
 	@JoinColumn(name = "FK_CLIENTE", nullable = true)
-    @ManyToOne(fetch = FetchType.EAGER )
+    @ManyToOne(fetch = FetchType.LAZY)
     private Cliente cliente;
 	
 	//@ManyToOne(cascade = CascadeType.REMOVE)
@@ -78,11 +79,11 @@ public class Prestamo {
 		this.fechaExpiracion = fechaExpiracion;
 	}
 
-	public String getTipo() {
+	public Long getTipo() {
 		return Tipo;
 	}
 
-	public void setTipo(String tipo) {
+	public void setTipo(Long tipo) {
 		Tipo = tipo;
 	}
 

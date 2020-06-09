@@ -32,7 +32,7 @@ INSERT INTO cliente (id,id_usuario,Nombre,Correo,Telefono,Direccion,Monto) VALUE
 INSERT INTO cliente (id,id_usuario,Nombre,Correo,Telefono,Direccion,Monto) VALUES(6,7,"Sonijie Empress","mienakutemo@hai.com",21212121212,"hinokamikagura#276",4500);
 
 
-INSERT INTO prestamo (monto,fecha_creacion,fecha_expiracion,Tipo,activo,FK_CLIENTE) VALUES(5000,CURRENT_TIMESTAMP,'2021-08-10',"1",1,1);
-INSERT INTO prestamo (monto,fecha_creacion,fecha_expiracion,Tipo,activo,FK_CLIENTE) VALUES(2000,CURRENT_TIMESTAMP,'2021-09-10',"2",1,1);
-INSERT INTO prestamo (monto,fecha_creacion,fecha_expiracion,Tipo,activo,FK_CLIENTE) VALUES(6000,CURRENT_TIMESTAMP,'2021-10-10',"3",1,1);
-INSERT INTO prestamo (monto,fecha_creacion,fecha_expiracion,Tipo,activo,FK_CLIENTE) VALUES(9000,CURRENT_TIMESTAMP,'2021-10-10',"1",1,1);
+INSERT INTO prestamo (monto,fecha_creacion,fecha_expiracion,Tipo,activo,FK_CLIENTE) VALUES(5000,CURRENT_TIMESTAMP,'2021-08-10',1,1,1);
+INSERT INTO prestamo (monto,fecha_creacion,fecha_expiracion,Tipo,activo,FK_CLIENTE) VALUES(2000,CURRENT_TIMESTAMP,'2021-09-10',2,1,1);
+INSERT INTO prestamo (monto,fecha_creacion,fecha_expiracion,Tipo,activo,FK_CLIENTE) VALUES(6000,CURRENT_TIMESTAMP,'2021-10-10',3,1,1);
+INSERT INTO prestamo (monto,fecha_creacion,fecha_expiracion,Tipo,activo,FK_CLIENTE) VALUES(9000,CURRENT_TIMESTAMP,'2021-10-10',1,1,1);
