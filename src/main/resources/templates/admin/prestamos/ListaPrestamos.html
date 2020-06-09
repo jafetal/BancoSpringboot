@@ -65,6 +65,7 @@
 					<th>Id cliente</th>
 					<th>Nombre</th>
 					<th>Expira</th>
+					<th>Activo</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -74,6 +75,8 @@
 					<td th:text="${prestamo.cliente.id}"></td>
 					<td th:text="${prestamo.cliente.Nombre}"></td>
 					<td th:text="${prestamo.fechaExpiracion}"></td>
+					<td th:if="${prestamo.activo}">Si</td>
+					<td th:if="${!prestamo.activo}">No</td>
 				</tr>
 			</tbody>
 		</table>

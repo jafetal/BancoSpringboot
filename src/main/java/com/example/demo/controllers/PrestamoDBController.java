@@ -96,11 +96,20 @@ public class PrestamoDBController {
 			return "admin/prestamos/SelectAbonar";
 		}else {
 			if(editar.getId()!=null) {
-				editar.setMonto(editar.getMonto()- abon.getNumero());
-				prestamoDao.update(editar);
-				Cliente actualizacion = clienteDao.find(id);
-				actualizacion.setMonto(actualizacion.getMonto()-abon.getNumero());
-				clienteDao.update(actualizacion);
+				if(editar.getMonto()<=abon.getNumero()) {
+					Cliente actualizacion = clienteDao.find(id);
+					actualizacion.setMonto(actualizacion.getMonto()-editar.getMonto());
+					editar.setMonto(0d);
+					editar.setActivo(false);
+					prestamoDao.update(editar);
+					clienteDao.update(actualizacion);
+				}else {
+					editar.setMonto(editar.getMonto()- abon.getNumero());
+					prestamoDao.update(editar);
+					Cliente actualizacion = clienteDao.find(id);
+					actualizacion.setMonto(actualizacion.getMonto()-abon.getNumero());
+					clienteDao.update(actualizacion);
+				}
 			}else {
 				Monto a = new Monto();
 				model.addAttribute("Monto", a);
