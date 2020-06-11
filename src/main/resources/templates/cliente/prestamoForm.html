@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+	crossorigin="anonymous">
+	<link rel="stylesheet" th:href="@{/css/EstilosGeneral.css}">
+<title >Nuevo prestamo</title>
+</head>
+<body>
+	<div class="container">
+	<div class="menuprestamos">
+	<div class="pprestamos">
+	<h2>Solicitar prestamo a mi nombre: <h2 th:text="${{cliente.Nombre}}"></h2></h2>
+		<div th:object="${prestamo}" th:remove="tag">
+			<ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger">Llene los campos correctamente para continuar</ul>
+		</div>
+		<form th:action="@{/cliente/nPrestamoAction}" method="post"
+			th:object="${prestamo}">
+
+			<div class="form-group">
+				<label class="col-sm-12 col-form-label" for="monto">Monto:</label>
+				<div class="col-sm-12">
+					<input type="text" id="monto" th:field="*{monto}"
+						class="form-control" th:errorclass="'form-control alert-danger'">
+					<div class="form-text text-danger"
+						th:if="${#fields.hasErrors('monto')}" th:errors="*{monto}"></div>
+				</div>
+			</div>
+			
+			<div class="form-group">
+			
+				<label class="col-sm-2 col-form-label" for="fechaExpiracion">Fecha de expiracion</label>
+				<div class="col-sm-12">
+				    <input type="text" id="fechaExpiracion"
+							th:field="*{fechaExpiracion}" class="form-control"
+							th:errorclass="'form-control alert-danger'" placeholder="aaaa/mm/dd">
+					<div class="form-text text-danger"
+						th:if="${#fields.hasErrors('fechaExpiracion')}"
+						th:errors="*{fechaExpiracion}"></div>
+				</div>
+			</div>
+		
+			<div class="form-group">
+				<label class="col-sm-12 col-form-label" for="Tipo">Tipo:</label>
+				<div class="col-sm-12">
+					<input type="text" id="Tipo" th:field="*{Tipo}"
+						class="form-control" th:errorclass="'form-control alert-danger'">
+					<div class="form-text text-danger"
+						th:if="${#fields.hasErrors('Tipo')}" th:errors="*{Tipo}"></div>
+				</div>
+			</div>	
+			<div class="form-group">
+				<div class="col-sm-12">
+				<a th:href="@{/cliente/prestamo}">
+					<button type="button" class="btn btn-dark">Cancelar</button>
+					</a>
+					<input type="submit" id="enviar" value="enviar"
+						class="btn btn-success">
+					
+				</div>
+			</div>
+		</form>
+	</div>
+	</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+		integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+		crossorigin="anonymous"></script>
+		
+	<script th:inline="javascript">
+	  $(function() {
+	    $('#picker').datetimepicker({
+	      language: 'pt-BR'
+	    });
+	  });
+	</script>
+</body>
+</html>
