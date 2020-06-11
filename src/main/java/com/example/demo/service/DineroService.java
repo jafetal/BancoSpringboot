@@ -1,6 +1,8 @@
 package com.example.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.ClienteDao;
@@ -27,5 +29,21 @@ public class DineroService {
 			}
 		}
 		return mayor;
+	}
+	
+	public void abonar(double dinero,long id) {
+		Cliente temporal = clienteDao.find(id);
+		temporal.setMonto(temporal.getMonto()+dinero);
+		clienteDao.update(temporal);
+	}
+	public void retirar(double dinero,long id) {
+		Cliente temporal = clienteDao.find(id);
+		if(!(dinero>temporal.getMonto())) {
+			temporal.setMonto(temporal.getMonto()-dinero);
+			clienteDao.update(temporal);
+		}else {
+			System.out.print("No hay suficiente saldo para retirar.....");//no tuve tiempo de mostrarlo en pantalla
+		}
+		
 	}
 }

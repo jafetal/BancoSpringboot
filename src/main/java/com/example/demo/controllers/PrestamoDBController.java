@@ -49,12 +49,12 @@ public class PrestamoDBController {
 
 	@GetMapping({ "/form/{id}" })
 	public String form(@PathVariable Long id, Model model) {
-		Prestamo cliente = new Prestamo();
-		cliente.setCliente(clienteDao.find(id));
-		cliente.setFechaCreacion(fecha.getCurrentTimeUsingDate());
-		cliente.setActivo(true);
+		Prestamo prestamo = new Prestamo();
+		prestamo.setCliente(clienteDao.find(id));
+		prestamo.setFechaCreacion(fecha.getCurrentTimeUsingDate());
+		prestamo.setActivo(true);
 		model.addAttribute("cliente", clienteDao.find(id));
-		model.addAttribute("prestamo", cliente);
+		model.addAttribute("prestamo", prestamo);
 		//System.out.print("\n\n\n\n"+PrestamoDao.find(1l).getId_usuario().getUsername());
 		return "admin/prestamos/prestamoForm";
 	}
