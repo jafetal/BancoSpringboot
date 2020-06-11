@@ -2,19 +2,17 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title th:text="Inicio">Insert title here</title>
+<title>Busqueda de Prestamos</title>
 	<link rel="stylesheet"
-		href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-		integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
-		crossorigin="anonymous">
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+	crossorigin="anonymous">
 	<link rel="stylesheet" th:href="@{/css/EstilosGeneral.css}">
-	
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-	
 </head>
 <body>
-
-
+	
+	
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<a class="navbar-brand" href="#">Sistema Administrador</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -30,7 +28,7 @@
 				</a></li>
 				
 				
-				<li class="nav-item active">
+				<li class="nav-item">
 				
 				<a class="nav-link" th:href="@{/admin/clientes}"><i class='far fa-user-circle icono'></i>Clientes</a>
 				</li>
@@ -40,7 +38,7 @@
 					th:href="@{/admin/prestamos}"><i class='far fas fa-money-bill-wave icono'></i>Prestamos</a></li>
 					
 					
-				<li> <div class="dropdown nav-item">
+				<li> <div class="dropdown nav-item active">
 				 <a class="nav-link dropdown-toggle" data-toggle="dropdown"
 					th:href="@{/}"><i class='far fas fa-search icono'></i>Busquedas</a>
 				 
@@ -50,27 +48,40 @@
 				    <a class="dropdown-item" th:href="@{/busqueda/Dinero}">Dinero</a>
 				  </div>
 				</div> </li>
-				
 			</ul>
 		</div>
 	</nav>
 	
 	
-	
-	<div class="container pClientes">
-		<div class="menuClientes">
-			<h2>Control de Clientes</h2>
-			<div><a  th:href="@{/admin/cliente/form}">
-		            <button type="button" class="btn btn-success botonCL"><i class="fas fa-user-plus iC"></i>Agregar Cliente</button>
-		         </a>
-	    	</div>
-	    	<div><a th:href="@{/admin/cliente/form/editar}">
-		            <button type="button" class="btn btn-primary botonCL"><i class="fas fa-edit iC"></i>Editar Cliente</i></button>
-	    	</div></a>
-	    	<div><a th:href="@{/admin/cliente/form/eliminar}">
-		            <button type="button" class="btn btn-danger botonCL"><i class="fas fa-trash-alt iC"></i>Eliminar Cliente</i></button>
-	    	</div></a>
-		</div>
+	<div class="container" style="padding-top:20px;">
+		<div><h2>Busque por cualquier campo:</h2></div>
+		<input class="form-control" id="myInput" type="text" placeholder="Id o nombre">
+		<div class="OpcFiltroPres"><div th:if="${filtro=='pagados' || filtro=='todos'}"><a th:href="@{/busqueda/Prestamos/pendientes}" class="btn btn-danger iC">Pendientes</a></div>
+		<div th:if="${filtro=='pendientes' || filtro=='todos'}"><a th:href="@{/busqueda/Prestamos/pagados}" class="btn btn-success iC">Pagados</a></div>
+		<div th:if="${filtro=='pendientes' || filtro=='pagados'}"><a th:href="@{/busqueda/Prestamos}" class="btn btn-primary iC">Ver todos</a></div></div>
+		<table class="table" >
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Monto restante a pagar</th>
+					<th>Id cliente</th>
+					<th>Nombre</th>
+					<th>Expira</th>
+					<th>Activo</th>
+				</tr>
+			</thead>
+			<tbody id="myTable">
+				<tr th:each="prestamo: ${prestamos}">
+					<td th:text="${prestamo.id}"></td>
+					<td th:text="${prestamo.Monto}"></td>
+					<td th:text="${prestamo.cliente.id}"></td>
+					<td th:text="${prestamo.cliente.Nombre}"></td>
+					<td th:text="${prestamo.fechaExpiracion}"></td>
+					<td th:if="${prestamo.activo}">Si</td>
+					<td th:if="${!prestamo.activo}">No</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -84,5 +95,15 @@
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
 		integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
 		crossorigin="anonymous"></script>
+	<script th:inline="javascript">
+	$(document).ready(function(){
+		  $("#myInput").on("keyup", function() {
+		    var value = $(this).val().toLowerCase();
+		    $("#myTable tr").filter(function() {
+		      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		    });
+		  });
+		});
+	</script>
 </body>
 </html>

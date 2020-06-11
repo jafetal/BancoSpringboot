@@ -63,6 +63,10 @@ public class Prestamo {
 
 	
 	
+	public void setTipo(long tipo) {
+		Tipo = tipo;
+	}
+
 	public Date getFechaCreacion() {
 		return fechaCreacion;
 	}

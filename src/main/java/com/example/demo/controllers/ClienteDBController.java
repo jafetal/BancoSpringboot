@@ -63,7 +63,6 @@ public class ClienteDBController {
 	public String form(Model model) {
 		Cliente nuevo = new Cliente();
 		model.addAttribute("cliente", nuevo);
-		//System.out.print("\n\n\n\n"+clienteDao.find(1l).getId_usuario().getUsername());
 		return "admin/clientes/addForm";
 	}
 

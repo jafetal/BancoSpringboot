@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<meta charset="utf-8">
+<title>Busqueda Clientes</title>
 	<link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
 	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
@@ -43,9 +43,9 @@
 					th:href="@{/}"><i class='far fas fa-search icono'></i>Busquedas</a>
 				 
 				  <div class="dropdown-menu">
-				    <a class="dropdown-item" th:href="@{/admin/listaClientes}">Clientes</a>
-				    <a class="dropdown-item" th:href="@{/}">Prestamos</a>
-				    <a class="dropdown-item" th:href="@{/}">Dinero</a>
+				    <a class="dropdown-item" th:href="@{/busqueda/Clientes}">Clientes</a>
+				    <a class="dropdown-item" th:href="@{/busqueda/Prestamos}">Prestamos</a>
+				    <a class="dropdown-item" th:href="@{/busqueda/Dinero}">Dinero</a>
 				  </div>
 				</div> </li>
 			</ul>
@@ -54,25 +54,45 @@
 	
 	
 	<div class="container">
+	<div><h2>Busque por nombre o ID:</h2></div>
+		  <input class="form-control" id="myInput" type="text" placeholder="Id o nombre">
 		<table class="table">
 			<thead>
 				<tr>
 					<th>ID</th>
 					<th>Nombre</th>
-					<th>Correo</th>
-					<th>Telefono</th>
-					<th>Direccion</th>
-					<th>Monto</th>
+					<th></th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody id="myTable">
 				<tr th:each="cliente: ${clientes}">
 					<td th:text="${cliente.id}"></td>
 					<td th:text="${cliente.Nombre}"></td>
-					<td th:text="${cliente.Correo}"></td>
-					<td th:text="${cliente.Telefono}"></td>
-					<td th:text="${cliente.Direccion}"></td>
-					<td th:text="${cliente.Monto}"></td>
+					<td><button type="button" class="btn btn-primary" data-toggle="modal" th:attr="data-target='#modal-insp'+${cliente.id}" >
+					 	 <i class="fas fa-eye iC"></i>Inspeccionar
+						</button></td>
+					<div class="modal fade" th:id="modal-insp+${cliente.id}" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">  
+						  <div class="modal-dialog" role="document">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <h2 class="modal-title" id="exampleModalLabel">Detalles</h2>
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						          <span aria-hidden="true">&times;</span>
+						        </button>
+						      </div>
+						      <div class="modal-body">
+						   		<div><h2 th:text="${cliente.Nombre}"></h2></div>
+							    <span class="iwt"><i class="far fa-envelope iC"></i><span th:text="${cliente.Correo} "></span></span>
+								<span class="iwt"><i class="fas fa-phone iC"></i><span th:text="${cliente.Telefono} "></span></span>	
+								<span class="iwt"><i class="fas fa-map-marker-alt iC"></i><span th:text="${cliente.Direccion} "></span></span>
+								<span class="iwt"><i class="fas fa-money-bill-wave iC"></i>$<span th:text="${cliente.Monto} "></span></span>
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
 				</tr>
 			</tbody>
 		</table>
@@ -89,5 +109,16 @@
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
 		integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
 		crossorigin="anonymous"></script>
+		
+	<script th:inline="javascript">
+	$(document).ready(function(){
+		  $("#myInput").on("keyup", function() {
+		    var value = $(this).val().toLowerCase();
+		    $("#myTable tr").filter(function() {
+		      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		    });
+		  });
+		});
+	</script>
 </body>
 </html>

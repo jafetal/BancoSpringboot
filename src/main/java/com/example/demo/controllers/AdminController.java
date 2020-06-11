@@ -29,9 +29,4 @@ public class AdminController {
 		return "admin/prestamos/controlPrestamos";
 	}
 	
-	@GetMapping({"/listaClientes"})
-	public String mostrarClientes(Model model) {
-		model.addAttribute("clientes", clienteDao.findAll());
-		return "admin/busquedas/ListaClientes";
-	}
 }

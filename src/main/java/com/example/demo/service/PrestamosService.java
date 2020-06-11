@@ -28,4 +28,8 @@ public class PrestamosService {
 			pDao.delete(i);
 		}
 	}
+	
+	public void opcional() {
+		
+	}
 }
